@@ -27,11 +27,11 @@ M = {'incorrect': 0,
      'correct': 1}
 
 # Observation 
-O = pd.Series(['incorrect', 'correct', 'incorrect', 'incorrect', 'incorrect',
+O = pd.Series(
+    ['incorrect', 'correct', 'incorrect', 'incorrect', 'incorrect',
      'incorrect','correct', 'incorrect', 'incorrect', 'correct',
      'incorrect','correct', 'incorrect', 'correct', 'correct',
      'correct'])
-
 
 O_index = np.array(O.map(M))
 
@@ -48,7 +48,7 @@ alpha(1, pi, A, B, O_index)
 
 P_O_given_lambda(pi, A, B, O_index)
 
-#%% Viterbi algorithm
+#%% VITERBI ALGORITHM
 
 delta, sequence = viterbi_algorithm(psi, pi, A, B, O_index)
 print(delta)

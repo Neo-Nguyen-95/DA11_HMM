@@ -22,11 +22,11 @@ def viterbi_algorithm(psi, pi, A, B, O_index):
                     # backtracking with previous_index to find previous sequence
                     
                     if probability_observation[:, current_index].argmax() == previous_index:
-                        psi[current_index] = psi[previous_index] + [current_index]
-                 
+                        psi[current_index] = psi[previous_index][:t] + [current_index]
+                        # only take into account up to time t of the sequence
+                        # avoid update the updated psi if 2 route start from a state
     
-    
-    for state in range(num_state):        
+    for state in range(num_state):
         if delta.argmax() == state:
             sequence = psi[state]
     

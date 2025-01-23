@@ -1,8 +1,7 @@
 #%% LIBRARY & INPUT
 import numpy as np
 import pandas as pd
-from forward_algorithm import alpha, P_O_given_lambda
-from viterbi_algorithm import viterbi_algorithm
+from hmm_module import HMM
 
 # Innitial probability
 # π =  [ U ] 
@@ -41,16 +40,19 @@ O_index = np.array(O.map(M))
 psi = [[0],
        [1]]
 
-#%% CALCULATION
+#%% FORWARD - BACKWARD ALGO
+hmm = HMM(pi, A, B, O_index, psi)
+hmm.alpha(2)
+hmm.beta(6)
 
-alpha(0, pi, A, B, O_index)
-alpha(1, pi, A, B, O_index)
+hmm.P_O_from_alpha()
+hmm.P_O_from_beta()
 
-P_O_given_lambda(pi, A, B, O_index)
+#%% COMBINE 2 PATH
+a_side = hmm.alpha(5) * A
+b_side = hmm.beta(6) * B[:, O_index[6]].reshape(-1, 1)
+P_O_from_alpha_beta = np.dot(a_side, b_side).sum()
 
 #%% VITERBI ALGORITHM
-
-delta, sequence = viterbi_algorithm(psi, pi, A, B, O_index)
-print(delta)
-print(sequence)
+hmm.viterbi()
 

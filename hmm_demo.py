@@ -45,14 +45,21 @@ hmm = HMM(pi, A, B, O_index)
 hmm.alpha(2)
 hmm.beta(6)
 
+# alpha path
 hmm.P_O_from_alpha()
+
+# beta path
 hmm.P_O_from_beta()
 
-#%% COMBINE 2 PATH
+# Combine 2 path
 a_side = hmm.alpha(5) * A
 b_side = hmm.beta(6) * B[:, O_index[6]].reshape(-1, 1)
 P_O_from_alpha_beta = np.dot(a_side, b_side).sum()
 
 #%% VITERBI ALGORITHM
 hmm.viterbi()
+
+#%% ZETA
+hmm.zeta(0)
+hmm.gamma(0)
 

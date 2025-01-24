@@ -17,6 +17,10 @@ class HMM:
         self.psi = np.array(range(len(pi))).reshape(-1, 1)
         
     def alpha(self, t):
+        '''alpha = [α(U)
+                    α(L)]
+        '''
+        
         b = self.B[:, self.O_index[t]].reshape(-1, 1)
     
         if t == 0:        
@@ -25,6 +29,10 @@ class HMM:
             return np.dot(self.A.T, self.alpha(t-1)) * b
         
     def beta(self, t):
+        '''beta = [β(U)
+                   β(L)]
+        '''
+        
         T = len(self.O_index)-1
         
         if t == T:
@@ -72,4 +80,25 @@ class HMM:
                 sequence = self.psi[state]
         
         return (delta.max(), sequence)
+    
+    def zeta(self, t):
+        '''            U         L
+        zeta = U | ζ(U, U) | ζ(U, L) |
+               L | ζ(L, U) | ζ(L, L) |
+        
+        '''
+        
+        return (self.alpha(t) * self.A 
+                * self.B[:, self.O_index[t+1]] * self.beta(t+1).reshape(1, -1)
+                / self.P_O_from_alpha()
+                )
+    
+    def gamma(self, t):
+        '''
+        gamma = γ(U)
+                γ(L)
+        '''
+        
+        return self.alpha(t) * self.beta(t) / np.sum(self.alpha(t) * self.beta(t))
+        
 

@@ -41,7 +41,7 @@ psi = [[0],
        [1]]
 
 #%% FORWARD - BACKWARD ALGO
-hmm = HMM(pi, A, B, O_index, psi)
+hmm = HMM(pi, A, B, O_index)
 hmm.alpha(2)
 hmm.beta(6)
 

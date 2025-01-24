@@ -1,19 +1,20 @@
 import numpy as np
 
 class HMM:
-    def __init__(self, pi, A, B, O_index, psi):
+    def __init__(self, pi, A, B, O_index):
         '''
         Parameter:
+            π: initial probability of hidden states
             A: transition probability matrix
             B: emission probability matrix
             O_index: index sequence of observation
-            
+            psi: index of hidden state, taken infor from pi
         '''
         self.pi = pi
         self.A = A
         self.B = B
         self.O_index = O_index
-        self.psi = psi
+        self.psi = np.array(range(len(pi))).reshape(-1, 1)
         
     def alpha(self, t):
         b = self.B[:, self.O_index[t]].reshape(-1, 1)

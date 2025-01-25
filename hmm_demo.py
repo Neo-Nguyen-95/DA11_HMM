@@ -1,8 +1,10 @@
 #%% LIBRARY & INPUT
 import numpy as np
 import pandas as pd
-from hmm_module import HMM
+from module_hmm_general import HMM
+from module_baum_welch import BaumWelchAlgo
 
+#%% HMM module
 # Innitial probability
 # π =  [ U ] 
 #      [ L ]
@@ -62,4 +64,7 @@ hmm.viterbi()
 #%% ZETA
 hmm.zeta(0)
 hmm.gamma(0)
+
+#%%
+
 

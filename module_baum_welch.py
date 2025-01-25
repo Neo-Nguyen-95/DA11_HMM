@@ -90,8 +90,16 @@ class BaumWelchAlgo:
                 self.B[:, obs] = b_k.reshape(1, -1)
             
             
-            
-            
+#%% TEST 
+# import pandas as pd
+         
+# bwa = BaumWelchAlgo(data, N=2)
+
+# bwa.training()
+
+# bwa.num_obs
+
+# bwa.show_value()        
             
             
             

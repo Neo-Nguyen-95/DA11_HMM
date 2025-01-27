@@ -48,8 +48,8 @@ hmm.P_O_from_alpha()
 hmm.P_O_from_beta()
 
 # Combine 2 path
-a_side = hmm.alpha(5) * A
-b_side = hmm.beta(6) * B[:, O_index[6]].reshape(-1, 1)
+a_side = hmm.alpha(5) * hmm.A
+b_side = hmm.beta(6) * hmm.B[:, O_index[6]].reshape(-1, 1)
 P_O_from_alpha_beta = np.dot(a_side, b_side).sum()
 
 #%% VITERBI ALGORITHM

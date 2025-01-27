@@ -62,16 +62,17 @@ class HMM:
                 for current_index in range(num_state):
                     # In each group of calculation, take the max out of N results
                     # delta store max value of current_index branch
-                
                     delta[current_index] = probability_observation[:, current_index].max()
+                    
                     
                     for previous_index in range(num_state):
                         # In each group of calculation, sorted by current_index
                         # Take argmax at current_index as psi
                         # backtracking with previous_index to find previous sequence
-                        
                         if probability_observation[:, current_index].argmax() == previous_index:
                             self.psi[current_index] = np.append(self.psi[previous_index][:t], current_index)
+                            
+                            # Note for [:t]:
                             # only take into account up to time t of the sequence
                             # avoid update the updated psi if 2 route start from a state
         

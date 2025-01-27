@@ -114,7 +114,7 @@ hg.state_mapping
 #      [0.15, 0.75, 0.1],
 #      [0.25, 0.25, 0.5]]
 # hidden_states_set =  ['Rainy', 'Sunny', 'Cloudy']
-# unique_obs_set = ['Umbrella', 'Sun Coat', 'T-shirt'] 
+# unique_obs_set = ['Umbrella', 'Sun coat', 'T-shirt'] 
 # obs_len = 100
 
 # hg = HMMGenerator(pi, A, B, hidden_states_set, unique_obs_set, obs_len) 

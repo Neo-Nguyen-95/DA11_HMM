@@ -7,16 +7,27 @@ class BaumWelchAlgo:
         self.N = N
         self.num_obs = len(set(O_index))
         
-        self.pi = np.ones([self.N, 1]) / self.N
-        self.A = np.ones([self.N, self.N]) / self.N
-        self.B = np.ones([self.N, self.num_obs]) / self.num_obs
+        
+        pi_rand = np.random.randint(1, 10, size=(self.N, 1))
+        # self.pi = pi_rand / np.sum(pi_rand).reshape(-1, 1)
+        self.pi = np.array([[1], [0]])
+        
+        A_rand = np.random.randint(1, 10, size=(self.N, self.N))
+        self.A = A_rand / np.sum(A_rand, axis=1).reshape(-1, 1)
+        
+      
+        
+        B_rand = np.random.randint(1, 10, size=(self.N, self.num_obs))
+        self.B = B_rand / np.sum(B_rand, axis=1).reshape(-1, 1)
+        
+
         
     def show_value(self):
         # print(self.O_index)
         # print(self.psi)
         
         print(self.pi)
-        print(self.A)
+        print(self.A)     
         print(self.B)
         
     def alpha(self, t):
@@ -64,10 +75,11 @@ class BaumWelchAlgo:
         gamma = γ(U)
                 γ(L)
         '''
-        return self.alpha(t) * self.beta(t) / np.sum(self.alpha(t) * self.beta(t))
+        return self.alpha(t) * self.beta(t) / self.P_O_from_alpha()
         
-    def training(self, epochs = 50):
-        for _ in range(epochs):
+    def training(self, epochs = 150):
+        for _ in range(epochs):          
+            
             self.pi = self.gamma(0)
             # print(self.pi)
             
@@ -79,27 +91,47 @@ class BaumWelchAlgo:
                 
             self.A = zeta_sum /gamma_sum
             
+            # print(self.A)
+            
             gamma_sum_2 = gamma_sum + self.gamma(len(self.O_index)-1)
             
             for obs in set(self.O_index):
+                
                 b_k = np.zeros([self.N, 1])  # temperatory value 
                 
+                # print('obs index=', np.where(self.O_index==obs)[0])
                 for t in np.where(self.O_index==obs)[0]:
+                    
                     b_k += self.gamma(t) / gamma_sum_2
                 
+                # print('B=', self.B)
+                # print('b_k=', b_k.reshape(1, -1))
+                
                 self.B[:, obs] = b_k.reshape(1, -1)
+                
+                # print('B updated=', self.B)
+        
             
             
 #%% TEST 
-# import pandas as pd
+import pandas as pd
+
+df = pd.read_csv('generated_data.csv')
          
-# bwa = BaumWelchAlgo(data, N=2)
+bwa = BaumWelchAlgo(O_index=df['obs_index'], N=2)
+
+bwa.training()
+
+bwa.show_value() 
+
+
+#%%
+# df = pd.read_csv('data_python.csv')
+# bwa = BaumWelchAlgo(O_index=df['Visible'], N=2)
+# bwa.show_value() 
 
 # bwa.training()
-
-# bwa.num_obs
-
-# bwa.show_value()        
+# bwa.show_value() 
             
             
             

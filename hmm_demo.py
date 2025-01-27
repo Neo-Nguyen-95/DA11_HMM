@@ -52,6 +52,8 @@ a_side = hmm.alpha(5) * hmm.A
 b_side = hmm.beta(6) * hmm.B[:, O_index[6]].reshape(-1, 1)
 P_O_from_alpha_beta = np.dot(a_side, b_side).sum()
 
+np.sum(hmm.alpha(3)*hmm.beta(3))
+
 #%% VITERBI ALGORITHM
 hmm.viterbi()
 

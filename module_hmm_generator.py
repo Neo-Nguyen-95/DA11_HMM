@@ -50,7 +50,6 @@ class HMMGenerator:
     
     def generate_sequences(self):
         
-        
         # Initial state with initial prob
         state_index = np.random.choice(self.state_index_set, p=self.pi.flatten())
         state_index_sequence = [state_index]
@@ -79,8 +78,8 @@ class HMMGenerator:
             
         
 #%% CASE STUDY 1: BKT sequence
-pi = [[0.8], 
-      [0.2]]
+pi = [[1], 
+      [0]]
 A = [[0.85, 0.15],
      [0., 1]]
 B = [[0.7, 0.3],

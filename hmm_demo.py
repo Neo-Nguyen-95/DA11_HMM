@@ -8,22 +8,22 @@ from module_baum_welch import BaumWelchAlgo
 # Innitial probability
 # π =  [ U ] 
 #      [ L ]
-pi = np.array([[0.8],
-               [0.2]])
+pi = [[0.8],
+      [0.2]]
 
 # Transition probability
 #            U     L 
 # A =   U | 0.5 | 0.5 |
 #       L | 0   |  1  |
-A = np.array([[0.5, 0.5],
-              [0, 1]])
+A = [[0.5, 0.5], 
+     [0, 1]]
 
 # Emission probability
 #           incorrect   correct  (sequence for mapping with index dict M)
 # B =   U |    0.9    |   0.1   |
 #       L |    0.2    |   0.8   |
-B = np.array([[0.9, 0.1],
-              [0.2, 0.8]])
+B = [[0.9, 0.1],
+     [0.2, 0.8]]
 M = {'incorrect': 0,
      'correct': 1}
 
@@ -35,12 +35,6 @@ O = pd.Series(
      'correct'])
 
 O_index = np.array(O.map(M))
-
-# Initial state
-# Unlearned : 0
-# Learned   : 1
-psi = [[0],
-       [1]]
 
 #%% FORWARD - BACKWARD ALGO
 hmm = HMM(pi, A, B, O_index)
@@ -64,7 +58,5 @@ hmm.viterbi()
 #%% ZETA
 hmm.zeta(0)
 hmm.gamma(0)
-
-#%%
 
 

@@ -10,11 +10,11 @@ class HMM:
             O_index: index sequence of observation
             psi: index of hidden state, taken infor from pi
         '''
-        self.pi = pi
-        self.A = A
-        self.B = B
-        self.O_index = O_index
-        self.psi = np.array(range(len(pi))).reshape(-1, 1)
+        self.pi = np.array(pi)
+        self.A = np.array(A)
+        self.B = np.array(B)
+        self.O_index = np.array(O_index)
+        self.psi = list(np.array(range(len(pi))).reshape(-1, 1))
         
     def alpha(self, t):
         '''alpha = [α(U)
@@ -71,7 +71,7 @@ class HMM:
                         # backtracking with previous_index to find previous sequence
                         
                         if probability_observation[:, current_index].argmax() == previous_index:
-                            self.psi[current_index] = self.psi[previous_index][:t] + [current_index]
+                            self.psi[current_index] = np.append(self.psi[previous_index][:t], current_index)
                             # only take into account up to time t of the sequence
                             # avoid update the updated psi if 2 route start from a state
         

@@ -78,7 +78,7 @@ class HMMGenerator:
                 obs_sequence)
             
         
-#%% RUNNING
+#%% CASE STUDY 1: BKT sequence
 pi = [[0.8], 
       [0.2]]
 A = [[0.85, 0.15],
@@ -91,7 +91,7 @@ obs_len = 100
 
 hg = HMMGenerator(pi, A, B, hidden_states_set, unique_obs_set, obs_len) 
 
-#%% SHOW VARIABLES
+# SHOW VARIABLES
 hg.pi
 hg.A
 hg.B
@@ -103,6 +103,23 @@ hg.obs_index_set
 
 hg.state_mapping
 
+#%% CASE STUDY 2: WEATHER
+# pi = [[1], 
+#       [0],
+#       [0]]
+# A = [[0.4, 0.15, 0.45],
+#      [0.2, 0.55, 0.25],
+#      [0.1, 0.2, 0.7]]
+# B = [[0.5, 0.3, 0.2],
+#      [0.15, 0.75, 0.1],
+#      [0.25, 0.25, 0.5]]
+# hidden_states_set =  ['Rainy', 'Sunny', 'Cloudy']
+# unique_obs_set = ['Umbrella', 'Sun Coat', 'T-shirt'] 
+# obs_len = 100
+
+# hg = HMMGenerator(pi, A, B, hidden_states_set, unique_obs_set, obs_len) 
+
+
 #%% GENERATE SEQUENCE
 (state_index_sequence, obs_index_sequence, state_sequence, obs_sequence
  ) = hg.generate_sequences()
@@ -113,3 +130,5 @@ df = pd.DataFrame(
      'state_index': state_index_sequence,
      'obs_index': obs_index_sequence
      })
+
+# df.to_csv('generated_data.csv')

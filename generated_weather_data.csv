@@ -1,0 +1,101 @@
+,hidden_state,observation,state_index,obs_index
+0,Rainy,Umbrella,0,0
+1,Sunny,Sun coat,1,1
+2,Sunny,Sun coat,1,1
+3,Sunny,Sun coat,1,1
+4,Sunny,Umbrella,1,0
+5,Rainy,T-shirt,0,2
+6,Sunny,T-shirt,1,2
+7,Sunny,Umbrella,1,0
+8,Sunny,Umbrella,1,0
+9,Sunny,T-shirt,1,2
+10,Sunny,Sun coat,1,1
+11,Sunny,Umbrella,1,0
+12,Sunny,Umbrella,1,0
+13,Rainy,Umbrella,0,0
+14,Rainy,Umbrella,0,0
+15,Sunny,T-shirt,1,2
+16,Sunny,Sun coat,1,1
+17,Sunny,Umbrella,1,0
+18,Sunny,Umbrella,1,0
+19,Sunny,Sun coat,1,1
+20,Sunny,Sun coat,1,1
+21,Sunny,T-shirt,1,2
+22,Sunny,Umbrella,1,0
+23,Sunny,Sun coat,1,1
+24,Rainy,Umbrella,0,0
+25,Sunny,Umbrella,1,0
+26,Sunny,Umbrella,1,0
+27,Rainy,Umbrella,0,0
+28,Rainy,Umbrella,0,0
+29,Rainy,Umbrella,0,0
+30,Rainy,Umbrella,0,0
+31,Rainy,T-shirt,0,2
+32,Sunny,Umbrella,1,0
+33,Sunny,Sun coat,1,1
+34,Rainy,Umbrella,0,0
+35,Sunny,Sun coat,1,1
+36,Sunny,Sun coat,1,1
+37,Sunny,Sun coat,1,1
+38,Sunny,Umbrella,1,0
+39,Sunny,T-shirt,1,2
+40,Rainy,Umbrella,0,0
+41,Rainy,T-shirt,0,2
+42,Rainy,Umbrella,0,0
+43,Sunny,Sun coat,1,1
+44,Sunny,T-shirt,1,2
+45,Sunny,Sun coat,1,1
+46,Rainy,Umbrella,0,0
+47,Sunny,Sun coat,1,1
+48,Rainy,Umbrella,0,0
+49,Sunny,Umbrella,1,0
+50,Rainy,Umbrella,0,0
+51,Sunny,Sun coat,1,1
+52,Sunny,Umbrella,1,0
+53,Sunny,Sun coat,1,1
+54,Rainy,Umbrella,0,0
+55,Sunny,T-shirt,1,2
+56,Rainy,Umbrella,0,0
+57,Sunny,Umbrella,1,0
+58,Sunny,Umbrella,1,0
+59,Sunny,Sun coat,1,1
+60,Sunny,Umbrella,1,0
+61,Sunny,Sun coat,1,1
+62,Sunny,Sun coat,1,1
+63,Sunny,Sun coat,1,1
+64,Sunny,Sun coat,1,1
+65,Sunny,Sun coat,1,1
+66,Sunny,Sun coat,1,1
+67,Sunny,T-shirt,1,2
+68,Sunny,T-shirt,1,2
+69,Sunny,Umbrella,1,0
+70,Sunny,Sun coat,1,1
+71,Sunny,Sun coat,1,1
+72,Sunny,Sun coat,1,1
+73,Rainy,Umbrella,0,0
+74,Sunny,T-shirt,1,2
+75,Sunny,Sun coat,1,1
+76,Sunny,Sun coat,1,1
+77,Sunny,Sun coat,1,1
+78,Sunny,Sun coat,1,1
+79,Rainy,Umbrella,0,0
+80,Sunny,Sun coat,1,1
+81,Sunny,T-shirt,1,2
+82,Rainy,Umbrella,0,0
+83,Sunny,Sun coat,1,1
+84,Sunny,Sun coat,1,1
+85,Sunny,Umbrella,1,0
+86,Sunny,Sun coat,1,1
+87,Rainy,Umbrella,0,0
+88,Sunny,Umbrella,1,0
+89,Sunny,Umbrella,1,0
+90,Rainy,Umbrella,0,0
+91,Sunny,Sun coat,1,1
+92,Sunny,Umbrella,1,0
+93,Rainy,Umbrella,0,0
+94,Sunny,Umbrella,1,0
+95,Sunny,Sun coat,1,1
+96,Sunny,Sun coat,1,1
+97,Rainy,Umbrella,0,0
+98,Rainy,Umbrella,0,0
+99,Rainy,T-shirt,0,2

@@ -1,10 +1,12 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from module_hmm_general import HMM
 
 #%% CLASS
 class BaumWelchAlgo:
-    def __init__(self, O_index, N, pi0=None, A0=None, B0=None, ll_eps=1e-6, max_epoch = 100):
+    def __init__(self, O_index, N, pi0=None, A0=None, B0=None, 
+                 ll_eps=1e-6, max_epoch = 200, random_state=42):
         self.O_index = np.array(O_index)
         self.psi = np.arange(N).reshape(-1, 1)
         self.N = N
@@ -17,18 +19,21 @@ class BaumWelchAlgo:
         if pi0:
             self.pi = np.array(pi0)
         else:
+            np.random.seed(random_state)
             pi_rand = np.random.randint(1, 10, size=(self.N, 1))
             self.pi = pi_rand / np.sum(pi_rand).reshape(-1, 1)
             
         if A0:
             self.A = np.array(A0)
         else:
+            np.random.seed(random_state+1)
             A_rand = np.random.randint(1, 10, size=(self.N, self.N))
             self.A = A_rand / np.sum(A_rand, axis=1).reshape(-1, 1)
         
         if B0:
             self.B = np.array(B0)
         else:
+            np.random.seed(random_state+2)
             B_rand = np.random.randint(1, 10, size=(self.N, self.num_obs))
             self.B = B_rand / np.sum(B_rand, axis=1).reshape(-1, 1)
         
@@ -99,44 +104,36 @@ class BaumWelchAlgo:
         epoch = 0
         
         while ll_delta > self.ll_eps and epoch < self.max_epoch:
-            
-            self.pi = self.gamma(0)
-            # print(self.pi)
-            
             zeta_sum = 0
             gamma_sum = 0
             for t in range(len(self.O_index)-1):
                 zeta_sum += self.zeta(t)
                 gamma_sum += self.gamma(t)
                 
-            self.A = zeta_sum /gamma_sum
-            
-            # print(self.A)
-            
-            gamma_sum_2 = gamma_sum + self.gamma(len(self.O_index)-1)
-            
+            gamma_sum_2 = gamma_sum + self.gamma(len(self.O_index)-1)  
+            B_temp = self.B  # temperature for this variable
             for obs in set(self.O_index):
                 
                 b_k = np.zeros([self.N, 1])  # temperatory value 
                 
-                # print('obs index=', np.where(self.O_index==obs)[0])
                 for t in np.where(self.O_index==obs)[0]:
                     
                     b_k += self.gamma(t) / gamma_sum_2
                 
-                # print('B=', self.B)
-                # print('b_k=', b_k.reshape(1, -1))
+                B_temp[:, obs] = b_k.reshape(1, -1)
                 
-                self.B[:, obs] = b_k.reshape(1, -1)
+            # update paramater
+            self.pi = self.gamma(0)
+            self.A = zeta_sum /gamma_sum
+            self.B = B_temp
+            epoch += 1
                 
-                # print('B updated=', self.B)
+            # compute current probability
             hmm = HMM(self.pi, self.A, self.B, self.O_index)
             self.log_likelihood.append(np.log10(hmm.P_O_from_alpha()))
             
-            epoch += 1
-            
             # update ll_delta from 3rd cycles
-            if epoch > 2:
+            if epoch > 1:
                 ll_delta = abs(self.log_likelihood[-1] - self.log_likelihood[-2])
                 
         print('Number of epochs:', epoch)
@@ -146,41 +143,4 @@ class BaumWelchAlgo:
         pd.Series(self.log_likelihood).plot()
         plt.show()
         
-            
-        
-            
-            
-#%% TEST 
-import pandas as pd
-
-df = pd.read_csv('generated_data.csv')
-bwa = BaumWelchAlgo(O_index=df['obs_index'], 
-                    N=2, 
-                    pi0=[[1], 
-                         [0]],
-                    A0=[[0.6, 0.4],
-                        [0.4, 0.6]],
-                    B0=[[0.7, 0.3],
-                        [0.3, 0.7]]
-                    )
-
-bwa.show_value()
-
-bwa.training()
-
-bwa.show_value()
-bwa.plot_log_likelihood()
-
-#%%
-# df = pd.read_csv('data_python.csv')
-# bwa = BaumWelchAlgo(O_index=df['Visible'], N=2)
-# bwa.show_value() 
-
-# bwa.training()
-# bwa.show_value() 
-            
-            
-            
-            
-            
-            
+          

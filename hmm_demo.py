@@ -70,9 +70,9 @@ bwa11 = BaumWelchAlgo(O_index=df['obs_index'],
                     N=2, 
                     pi0=[[0.8], 
                          [0.2]],
-                    A0=[[0.6, 0.4],
+                    A0=[[0.4, 0.6],
                         [0.4, 0.6]],
-                    B0=[[0.7, 0.3],
+                    B0=[[0.3, 0.7],
                         [0.3, 0.7]],
                     max_epoch=300
                     )
@@ -138,6 +138,10 @@ O_index = df['obs_index']
 hmm = HMM(pi, A, B, O_index)
 hmm.P_O_from_alpha()
 
-
-
-
+# double check with hmm library
+# from hmmlearn import hmm
+# model = hmm.CategoricalHMM(n_components=2, n_iter=900)
+# model.fit(np.array(O_index).reshape(-1, 1))
+# model.emissionprob_
+# model.transmat_
+# model.startprob_

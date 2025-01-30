@@ -140,4 +140,4 @@ df = pd.DataFrame(
      'obs_index': obs_index_sequence
      })
 
-df.to_csv('generated_weather_data.csv')
+# df.to_csv('generated_weather_data.csv')
